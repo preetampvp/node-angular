@@ -1,0 +1,20 @@
+{
+  "name": "node-angular",
+  "version": "0.0.0",
+  "homepage": "https://github.com/preetampvp/node-angular",
+  "authors": [
+    "Preetam Pattanashetty"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-router": "~0.2.13"
+  }
+}
