@@ -12,6 +12,12 @@ angular.module 'linkedInApp', ['ui.router']
         templateUrl: 'partials/home.html',
         controller: 'Home',
         controllerAs: 'vm'
+      },
+      header: {
+        templateUrl: 'partials/header.html'
+      },
+      footer: {
+        templateUrl: 'partials/footer.html'
       }
     }
   }

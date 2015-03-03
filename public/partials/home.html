@@ -1,1 +1,10 @@
-<div>{{ vm.Title }}</div>
+<div data-ng-hide="vm.isAuthenticated" data-ng-init="vm.init()">
+    <div> -- Content --</div>
+    <script type="in/Login"></script>
+</div>
+<div data-ng-show="vm.isAuthenticated">
+    <div class="alert alert-info">
+      <div data-ng-repeat="step in vm.processSteps">{{ step }}</div>
+    </div>
+
+</div>
