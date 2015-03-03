@@ -27,7 +27,7 @@ Home = ($scope, linkedInApiService) ->
             vm.myConnections = data.values
             console.log vm.myConnections
             vm.updateProgress "- Total Connection: #{vm.myConnections.length}"
-            vm.updateProgress "-- To do massage this data and save it to mongo."
+            vm.updateProgress "--- To do massage this data and save it to mongo."
 
 
   updateProgress = (text) ->
