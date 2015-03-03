@@ -1,13 +1,7 @@
-body {
-
-}
-
-.content {
-
-}
-
 .navbar {
     padding-left: 30px !important;
+    background-color: #1D599D !important;
+    border-bottom: #1D599D !important;
 }
 
 .font-inverse {

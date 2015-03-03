@@ -1,6 +1,10 @@
 <div data-ng-hide="vm.isAuthenticated" data-ng-init="vm.init()">
-    <div> -- Content --</div>
-    <script type="in/Login"></script>
+    <div class="well">
+        -- Content --
+    </div>
+    <div class="text-right">
+        <script type="in/Login"></script>
+    </div>
 </div>
 <div data-ng-show="vm.isAuthenticated">
     <div class="alert aler" data-ng-class="vm.errorSaving ? 'alert-danger' : 'alert-info'">

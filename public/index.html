@@ -14,13 +14,18 @@
     </div>
     <script type="text/javascript" src="http://platform.linkedin.com/in.js">
         api_key: 75hgt3pftv6fva
+        onLoad: onLinkedInLoad
     </script>
-
-   <script type="text/javascript">
-       var apiBaseUrl = "http://localhost:9000/api/";
-   </script>
+    <script type="text/javascript">
+        function onLinkedInLoad() {        // Use a larger login icon.
+            $('a[id*=li_ui_li_gen_]').css({marginBottom:'20px'})
+                    .html('<img src="assets/linkedin-register.png" height="41" width="215" border="0" />');
+        }
+    </script>
+    <script src="vendor/jquery/dist/jquery.min.js"></script>
     <script src="vendor/angular/angular.min.js"></script>
     <script src="vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="app/config.js"></script>
     <script src="app/app.js"></script>
     <script src="app/controllers/home-controller.js"></script>
     <script src="app/services/linkedIn-service.js"></script>
