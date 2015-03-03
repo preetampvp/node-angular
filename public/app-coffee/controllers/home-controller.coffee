@@ -17,15 +17,18 @@ Home = ($scope, linkedInApiService) ->
     vm.updateProgress '- Fetching your Linkedin profile information.'
     myProfilePromise = linkedInApiService.getMyProfile()
     myProfilePromise.then (data) ->
-      if data?
+      if data.values?
         vm.myProfile = data.values[0]
         vm.updateProgress "- Hi #{vm.myProfile.firstName} #{vm.myProfile.lastName}, welcome to PP."
         vm.updateProgress '- Fetching connections'
         myConnectionsPromise = linkedInApiService.getMyConnections()
         myConnectionsPromise.then (data) ->
-          if data?
-            vm.myConnections = data
+          if data.values?
+            vm.myConnections = data.values
             console.log vm.myConnections
+            vm.updateProgress "- Total Connection: #{vm.myConnections.length}"
+            vm.updateProgress "-- To do massage this data and save it to mongo."
+
 
   updateProgress = (text) ->
     vm.processSteps.push text
