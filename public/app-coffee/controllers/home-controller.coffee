@@ -18,15 +18,15 @@ Home = ($scope, linkedInApiService) ->
     myProfilePromise = linkedInApiService.getMyProfile()
     myProfilePromise.then (data) ->
       if data.values?
-        vm.myProfile = data.values[0]
-        vm.updateProgress "- Hi #{vm.myProfile.firstName} #{vm.myProfile.lastName}, welcome to PP."
+        vm.linkedInInfo.myProfile = data.values[0]
+        vm.updateProgress "- Hi #{vm.linkedInInfo.myProfile.firstName} #{vm.linkedInInfo.myProfile.lastName}, welcome to PP."
         vm.updateProgress '- Fetching connections'
         myConnectionsPromise = linkedInApiService.getMyConnections()
         myConnectionsPromise.then (data) ->
           if data.values?
-            vm.myConnections = data.values
-            console.log vm.myConnections
-            vm.updateProgress "- Total Connection: #{vm.myConnections.length}"
+            vm.linkedInInfo.myConnections = data.values
+            console.log vm.linkedInInfo.myConnections
+            vm.updateProgress "- Total Connection: #{vm.linkedInInfo.myConnections.length}"
             vm.updateProgress "--- To do massage this data and save it to mongo."
 
 
@@ -37,8 +37,10 @@ Home = ($scope, linkedInApiService) ->
   vm = this
   vm.isAuthenticated = false
   vm.processSteps = []
-  vm.myProfile = null
-  vm.myConnections = null
+  vm.linkedInInfo = {
+    myProfile: null,
+    myConnections: null
+  }
 
   vm.auth = onAuth
   vm.startFetchingProcess = startFetchingProcess
