@@ -1,6 +1,6 @@
 'use strict'
 
-Home = ($scope, linkedInApiService) ->
+Home = ($scope, linkedInApiService, apiService) ->
 
   init = () ->
     IN.Event.on(IN, 'auth', vm.auth)
@@ -19,7 +19,7 @@ Home = ($scope, linkedInApiService) ->
     myProfilePromise.then (data) ->
       if data.values?
         vm.linkedInInfo.myProfile = data.values[0]
-        console.log JSON.stringify vm.linkedInInfo.myProfile
+#        console.log JSON.stringify vm.linkedInInfo.myProfile
 
         vm.updateProgress "- Hi #{vm.linkedInInfo.myProfile.firstName} #{vm.linkedInInfo.myProfile.lastName}, welcome to PP."
         vm.updateProgress '- Fetching connections'
@@ -27,14 +27,20 @@ Home = ($scope, linkedInApiService) ->
         myConnectionsPromise.then (data) ->
           if data.values?
             vm.linkedInInfo.myConnections = data.values
-            console.log(JSON.stringify(vm.linkedInInfo.myConnections[0]))
+#            console.log(JSON.stringify(vm.linkedInInfo.myConnections[0]))
             vm.updateProgress "- Total Connection: #{vm.linkedInInfo.myConnections.length}"
-            vm.updateProgress "--- To do massage this data and save it to mongo."
+            vm.updateProgress "- Saving LinkedIn profile and connection."
+            savePromise = apiService.saveProfileData(vm.linkedInInfo)
 
+            savePromise
+            .then () ->
+              vm.updateProgress '- Data saved. Thanks you.'
+            .catch () ->
+              vm.errorSaving = true
+              vm.updateProgress '- Error saving data. Please try again later.'
 
   updateProgress = (text) ->
     vm.processSteps.push text
-
 
   vm = this
   vm.isAuthenticated = false
@@ -48,8 +54,9 @@ Home = ($scope, linkedInApiService) ->
   vm.startFetchingProcess = startFetchingProcess
   vm.updateProgress = updateProgress
   vm.init = init
+  vm.errorSaving = false
 
   return
 
 angular.module 'linkedInApp'
-.controller('Home', ['$scope', 'linkedInApiService', Home])
+.controller('Home', ['$scope', 'linkedInApiService', 'apiService', Home])

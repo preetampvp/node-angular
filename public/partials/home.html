@@ -3,8 +3,7 @@
     <script type="in/Login"></script>
 </div>
 <div data-ng-show="vm.isAuthenticated">
-    <div class="alert alert-info">
+    <div class="alert aler" data-ng-class="vm.errorSaving ? 'alert-danger' : 'alert-info'">
       <div data-ng-repeat="step in vm.processSteps">{{ step }}</div>
     </div>
-
 </div>
