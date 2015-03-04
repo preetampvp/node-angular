@@ -1,7 +1,10 @@
 mongojs = require 'mongojs'
 Q = require 'q'
 
-connectionString = process.env.connectionString || '127.0.0.1:27017/LinkedInProfiles'
+connectionString = '127.0.0.1:27017/LinkedInProfiles'
+if process.env.MongoConnection?
+  connectionString = "#{process.env.MongoConnection}/LinkedInProfiles"
+
 db = mongojs connectionString
 
 checkIfProfileExists = (id) ->

@@ -37,10 +37,10 @@ gulp.task 'package', (done) ->
   clean 'release.zip', done
   sourceGlob = [
     './api/*.*',
-    './public/app/*.*',
-    './public/css/*.*',
-    './public/assets/*.*',
-    './public/partials/*.*',
+    './public/app/**/*.*',
+    './public/css/**/*.*',
+    './public/assets/**/*.*',
+    './public/partials/**/*.*',
     './public/index.html',
     './.bowerrc',
     './bower.json',

@@ -7,7 +7,10 @@ app = express()
 databaseWrapper = require './api/database-wrapper.coffee'
 
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use bodyParser.json()
+app.use bodyParser.json({
+  limit: '15mb'
+})
+
 
 publicFolder = './public/'
 app.use(express.static(path.join(__dirname, 'public')))
@@ -36,5 +39,6 @@ app.post '/api/saveProfile', (req, res) ->
     res.sendStatus 500
 
 
-app.listen process.env.port || "9000", () ->
-  console.log 'server started.'
+port = process.env.port || "9000"
+app.listen port, () ->
+  console.log "server started on port #{port}"
