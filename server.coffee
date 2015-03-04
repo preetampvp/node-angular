@@ -39,13 +39,12 @@ app.post '/api/saveProfile', (req, res) ->
     res.sendStatus 500
 
 app.get '/api/getStats', (req, res) ->
-  res.send [
-    {
-      name: 'Preetam Pattanashetty',
-      connections: 70
-    }
-  ]
-
+  promise = databaseWrapper.getStats()
+  promise
+  .then (data) ->
+    res.send data
+  .catch () ->
+    res.sendStatus 500
 
 port = process.env.port || "9000"
 app.listen port, () ->

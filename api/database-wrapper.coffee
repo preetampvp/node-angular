@@ -1,9 +1,12 @@
 mongojs = require 'mongojs'
 Q = require 'q'
+_ = require 'lodash'
 
 connectionString = '127.0.0.1:27017/LinkedInProfiles'
 if process.env.MongoConnection?
   connectionString = "#{process.env.MongoConnection}/LinkedInProfiles"
+
+profileCollection = 'profiles'
 
 db = mongojs connectionString
 
@@ -13,7 +16,7 @@ checkIfProfileExists = (id) ->
     "myProfile.id" : id
   }
 
-  db.collection('profiles').find(query, { _id : 1}, (err, docs) ->
+  db.collection(profileCollection).find(query, { _id : 1}, (err, docs) ->
     if err?
       deferred.reject()
       return
@@ -25,7 +28,7 @@ checkIfProfileExists = (id) ->
 
 saveProfile = (profile) ->
   deferred = Q.defer()
-  db.collection('profiles').insert(profile, (err) ->
+  db.collection(profileCollection).insert(profile, (err) ->
 
     if err?
       deferred.reject()
@@ -36,9 +39,48 @@ saveProfile = (profile) ->
 
   return deferred.promise
 
+getStats = () ->
+  deferred = Q.defer()
+
+  db.collection(profileCollection).find({}, {
+    'myProfile.firstName' : 1,
+    'myProfile.lastName' : 1,
+    'myProfile.emailAddress': 1,
+    'myConnections': 1,
+    '_id': 0 }, (err, docs) ->
+
+    if err?
+      console.log err
+      deferred.reject()
+      return
+
+    data = []
+    _.each docs, (doc) ->
+      name = "#{doc.myProfile.firstName} #{doc.myProfile.lastName}"
+
+      emailAddress = ''
+      if doc.myProfile.emailAddress?
+        emailAddress = doc.myProfile.emailAddress
+
+      connections = 0
+      if doc.myConnections?
+        connections = doc.myConnections.length
+
+      data.push {
+        name: name,
+        emailAddress: emailAddress,
+        connections: connections
+      }
+
+    deferred.resolve data
+  )
+
+  return deferred.promise
+
 DatabaseWrapper = {
   checkIfProfileExists: checkIfProfileExists,
   saveProfile: saveProfile
+  getStats: getStats
 }
 
 module.exports = DatabaseWrapper

@@ -4,7 +4,10 @@ StatsController = (apiService) ->
     promise = apiService.getStats()
     promise
     .then (data) ->
-      vm.stats = data
+      if data.length is 0
+        vm.noData = true
+      else
+        vm.stats = data
     .catch () ->
       vm.err = true
 
@@ -12,6 +15,7 @@ StatsController = (apiService) ->
   vm.init = init
   vm.stats = []
   vm.err = false
+  vm.noData = false
 
   return
 

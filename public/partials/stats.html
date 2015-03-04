@@ -2,20 +2,25 @@
     <h4>Stats</h4>
 
     <div data-ng-show="vm.err" class="alert alert-danger">
-        Error fetching data.
+        error fetching data.
+    </div>
+    <div data-ng-show="vm.noData" class="alert alert-warning">
+        no data available.
     </div>
 
-    <div data-ng-hide="vm.err">
+    <div data-ng-hide="vm.err || vm.noData">
       <table class="table table-striped table-bordered table-hover">
           <thead>
             <tr>
                 <th>Name</th>
+                <th>Email</th>
                 <th>Connections</th>
             </tr>
           </thead>
           <tbody>
           <tr data-ng-repeat="profile in vm.stats">
               <td>{{ profile.name }}</td>
+              <td>{{ profile.emailAddress }}</td>
               <td>{{ profile.connections }}</td>
           </tr>
           </tbody>
