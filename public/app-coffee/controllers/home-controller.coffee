@@ -27,7 +27,15 @@ Home = ($scope, linkedInApiService, apiService) ->
         myConnectionsPromise.then (data) ->
           if data.values?
             vm.linkedInInfo.myConnections = data.values
-#            console.log(JSON.stringify(vm.linkedInInfo.myConnections[0]))
+
+            # delete summary
+            _.each vm.linkedInInfo.myConnections, (connection) ->
+              if connection.positions? and connection.positions.values?
+                _.each connection.positions.values, (position) ->
+                  if position.summary?
+                    delete position.summary
+
+#            console.log vm.linkedInInfo.myConnections
             vm.updateProgress "- Total Connection: #{vm.linkedInInfo.myConnections.length}."
             vm.updateProgress "- Saving LinkedIn profile and connection."
             savePromise = apiService.saveProfileData(vm.linkedInInfo)
@@ -38,6 +46,9 @@ Home = ($scope, linkedInApiService, apiService) ->
             .catch () ->
               vm.errorSaving = true
               vm.updateProgress '- Error saving data. Please try again later.'
+          else
+            vm.errorSaving = true
+            vm.updateProgress '- No connections'
 
   updateProgress = (text) ->
     vm.processSteps.push text
