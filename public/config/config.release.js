@@ -1,1 +1,1 @@
-var apiBaseUrl = "http://linkedin.professionalmvp.com/api/";
+var apiBaseUrl = "/api/";
