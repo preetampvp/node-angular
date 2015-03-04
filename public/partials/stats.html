@@ -1,0 +1,24 @@
+<div data-ng-init="vm.init()">
+    <h4>Stats</h4>
+
+    <div data-ng-show="vm.err" class="alert alert-danger">
+        Error fetching data.
+    </div>
+
+    <div data-ng-hide="vm.err">
+      <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+                <th>Name</th>
+                <th>Connections</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr data-ng-repeat="profile in vm.stats">
+              <td>{{ profile.name }}</td>
+              <td>{{ profile.connections }}</td>
+          </tr>
+          </tbody>
+      </table>
+    </div>
+</div>

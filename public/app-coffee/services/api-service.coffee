@@ -14,7 +14,19 @@ ApiService = ($q, $http) ->
         deferred.reject()
 
       return deferred.promise
+    ,
+    getStats: () ->
+      deferred = $q.defer()
+      $http.get "#{apiBaseUrl}getStats"
+      .success (data, status) ->
+        console.log status
+        deferred.resolve data
 
+      .error (data, status) ->
+        console.log data, status
+        deferred.reject()
+
+      return deferred.promise
   }
 
 angular.module 'linkedInApp'

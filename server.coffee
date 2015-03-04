@@ -38,6 +38,14 @@ app.post '/api/saveProfile', (req, res) ->
   .catch () ->
     res.sendStatus 500
 
+app.get '/api/getStats', (req, res) ->
+  res.send [
+    {
+      name: 'Preetam Pattanashetty',
+      connections: 70
+    }
+  ]
+
 
 port = process.env.port || "9000"
 app.listen port, () ->
