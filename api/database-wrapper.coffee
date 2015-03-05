@@ -62,14 +62,20 @@ getStats = () ->
       if doc.myProfile.emailAddress?
         emailAddress = doc.myProfile.emailAddress
 
-      connections = 0
+      totalConnections = 0
+      connectionsNotHidden = 0
       if doc.myConnections?
-        connections = doc.myConnections.length
+        totalConnections = doc.myConnections.length
+        notHiddenConnections =  _.filter doc.myConnections, (connection) ->
+          connection.id isnt 'private'
+
+        connectionsNotHidden = notHiddenConnections.length
 
       data.push {
         name: name,
         emailAddress: emailAddress,
-        connections: connections
+        totalConnections: totalConnections,
+        connectionsNotHidden: connectionsNotHidden
       }
 
     deferred.resolve data

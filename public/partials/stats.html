@@ -14,14 +14,16 @@
             <tr>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Connections</th>
+                <th>Total Connections</th>
+                <th>Connections Visible</th>
             </tr>
           </thead>
           <tbody>
           <tr data-ng-repeat="profile in vm.stats">
               <td>{{ profile.name }}</td>
               <td>{{ profile.emailAddress }}</td>
-              <td>{{ profile.connections }}</td>
+              <td>{{ profile.totalConnections }}</td>
+              <td>{{ profile.connectionsNotHidden }}</td>
           </tr>
           </tbody>
       </table>
