@@ -42,7 +42,7 @@ Home = ($scope, linkedInApiService, apiService) ->
 
             savePromise
             .then () ->
-              vm.updateProgress '- Data saved. Thank you.'
+              vm.updateProgress '- Data saved. Thanks again.'
             .catch () ->
               vm.errorSaving = true
               vm.updateProgress '- Error saving data. Please try again later.'
