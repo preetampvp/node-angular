@@ -3,10 +3,29 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>LinkedIn</title>
+    <!--[if lte IE 8]>
+    <script>
+        document.createElement('ng-include');
+        document.createElement('ng-pluralize');
+        document.createElement('ng-view');
+        // Optionally these for CSS
+        document.createElement('ng:include');
+        document.createElement('ng:pluralize');
+        document.createElement('ng:view');
+    </script>
+    <![endif]-->
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
     <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
+    <!--[if lte IE 7]>
+    <p class="alert alert-warning">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
     <div class="container content">
         <div data-ui-view="header"></div>
         <div data-ui-view="main"></div>
@@ -16,14 +35,15 @@
         api_key: 75hgt3pftv6fva
         onLoad: onLinkedInLoad
     </script>
+
     <script type="text/javascript">
-        function onLinkedInLoad() {        // Use a larger login icon.
+        function onLinkedInLoad() {
             $('a[id*=li_ui_li_gen_]').css({marginBottom:'20px'})
                     .html('<img src="assets/linkedin-register.png" height="41" width="215" border="0" />');
         }
     </script>
     <script src="vendor/jquery/dist/jquery.min.js"></script>
-    <script src="vendor/lodash/lodash.min.js"></script>
+    <script src="vendor/lodash/dist/lodash.min.js"></script>
 
     <script src="vendor/angular/angular.min.js"></script>
     <script src="vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
