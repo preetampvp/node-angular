@@ -27,6 +27,20 @@ ApiService = ($q, $http) ->
         deferred.reject()
 
       return deferred.promise
+    ,
+    getLoginRadiusInfo: (token) ->
+      deferred = $q.defer()
+      console.log token
+      $http.get "#{apiBaseUrl}loginradius/info?token=#{token}"
+      .success (data, status) ->
+        console.log status
+        deferred.resolve data
+
+      .error (data, status) ->
+        console.log data, status
+        deferred.reject()
+
+      return deferred.promise
   }
 
 angular.module 'linkedInApp'

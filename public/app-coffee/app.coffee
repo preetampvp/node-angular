@@ -38,4 +38,39 @@ angular.module 'linkedInApp', ['ui.router']
       }
     }
   }
+
+  .state 'loginradius', {
+    url: '/loginradius',
+    views: {
+      main: {
+        templateUrl: 'partials/login-radius.html',
+        controller: 'LoginRadius',
+        controllerAs: 'vm'
+      },
+      header: {
+        templateUrl: 'partials/header.html'
+      },
+      footer: {
+        templateUrl: 'partials/footer.html'
+      }
+    }
+  }
+
+  .state 'loggedon', {
+    url: '/loggedon',
+    views: {
+      main: {
+        templateUrl: 'partials/post-logon.html',
+        controller: 'PostLogon',
+        controllerAs: 'vm'
+      },
+      header: {
+        templateUrl: 'partials/header.html'
+      },
+      footer: {
+        templateUrl: 'partials/footer.html'
+      }
+    }
+  }
+
 ]

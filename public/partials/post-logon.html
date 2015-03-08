@@ -1,0 +1,12 @@
+<div data-ng-hide="vm.errorMessage == ''" class="alert alert-danger">{{ vm.errorMessage }}</div>
+<div>Token: {{vm.token}}</div>
+<div data-ng-show="vm.profile" class="well">
+    <p><img data-ng-src="{{vm.profile.GravatarImageUrl}}" /></p>
+    <p>{{vm.profile.FullName | uppercase }}</p>
+    <p>Provider: {{ vm.profile.Provider }}</p>
+    <div>
+        Emails:
+        <div data-ng-repeat="email in vm.profile.Email">{{email.Value}}</div>
+    </div>
+</div>
+

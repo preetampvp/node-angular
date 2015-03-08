@@ -5,6 +5,7 @@ path = require 'path'
 app = express()
 
 databaseWrapper = require './api/database-wrapper.coffee'
+loginradiuswrapper = require './loginradius/login-radius-wrapper.coffee'
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use bodyParser.json({
@@ -42,6 +43,17 @@ app.get '/api/getStats', (req, res) ->
   promise = databaseWrapper.getStats()
   promise
   .then (data) ->
+    res.send data
+  .catch () ->
+    res.sendStatus 500
+
+app.post '/postlogon', (req, res) ->
+  token = req.body.token
+  res.redirect("/#/loggedon?token=#{token}")
+
+app.get '/api/loginradius/info', (req, res) ->
+  promise = loginradiuswrapper.getUserProfile req.query.token
+  promise.then (data) ->
     res.send data
   .catch () ->
     res.sendStatus 500

@@ -37,6 +37,7 @@ gulp.task 'package', (done) ->
   clean 'release.zip', done
   sourceGlob = [
     './api/*.*',
+    './loginradius/*.*',
     './public/app/**/*.*',
     './public/css/**/*.*',
     './public/assets/**/*.*',
